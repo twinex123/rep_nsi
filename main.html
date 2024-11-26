@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSI 2024</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://kit.fontawesome.com/29ce918257.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <!-- MAIN CONDUCTOR -->
+    <div class="main_conductor">
+        <iframe src="" frameborder="0" id="main_conductor_iframe"></iframe>
+    </div>
+
+    <script>
+        const mainConductorIframe = document.getElementById("main_conductor_iframe");
+
+        mainConductorIframe.src = "3d_crt.html";
+    </script>
+
+    <div class="splash_screen"></div>
+    <div class="splash_shadow"></div>
+    <div class="splash_menu">
+        <div class="hero_image">
+            <p style="font-family: Henny Penny; font-size: 6em; margin-top: 0 !important; margin-bottom: 0 !important;">Crisis</p>
+        </div>
+        <div class="socials">
+            <div class="github_social">
+                <a href="https://github.com/twinex123/Crisis" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <div class="options">
+            <ul>
+                <li><button onclick="creditsStart()">Jouer </button></li>
+                <li><button onclick="openOptions()">Progression</button></li>
+                <li><button onclick="openFullCredits()">Crédits</button></li>
+            </ul>
+            <br><br>
+            
+        </div>
+        <div class="tips_container">
+            <div class="tips_icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <p>Utilisez les flèches du clavier pour naviguer entre les options.</p>
+        </div>
+
+        <p id="timeSpent">Temps de jeu : 0 heures 0 minutes</p>
+    </div>
+
+    <div class="credits">
+        <div class="credits_text">
+
+        </div>
+
+    </div>
+
+    <div class="full_credits">
+
+        <div class="close_credits" onclick="closeFullCredits()">
+            <span><i class="fa-solid fa-xmark"></i></span>
+        </div>
+
+        <div class="credits_content">
+            <h1 style="font-size: 3.5em;">Crédits</h1>
+            <br>
+            <h4>Développé par Florestan et</h4>
+            <br>
+            <h4>Parties en python codées par Tristan</h4>
+            <br>
+            <strong><h2>Soundtrack:</h2></strong>
+            <h4>Twelves Minutes - "I" : https://www.youtube.com/watch?v=rwKkroWaI1g</h4>
+            <h4>Demon's Souls Soundtrack - "One Who Craves Souls" : https://www.youtube.com/watch?v=6ESqvGzdnvs</h4>
+            <br>
+            <strong><h2>Technologies utilisées:</h2></strong>
+            <h4>Three.js : https://threejs.org/</h4>
+            <h4>Javascript </h4>
+            <h4>HTML</h4>
+            <h4>Sass (CSS)</h4>
+            <br>
+            <h4>Voix générées par intelligence artificielle grâce à Eleven Labs</h4>
+            <br>
+            <h4>Login windows xp by Lucas Gmelo : https://github.com/lucasgmelo/xp/</h4>
+            <br>
+            <strong><h4>Code source : https://github.com/twinex123/Crisis</h4></strong>
+        </div>
+
+        <div class="credits_logo">
+            <p style="font-family: Henny Penny; font-size: 5.5em; margin-top: 0 !important; margin-bottom: 0 !important;">Crisis</p>
+        </div>
+    </div>
+
+    <div class="options_page">
+        <video autoplay muted loop class="background_video">
+            <source src="assets/video/options.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+        <div class="options_overlay"></div>
+        <div class="close_credits" onclick="closeOptions()" style="z-index: 1000;">
+            <span><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="options_content">
+            <h1>Progression</h1>
+            <div class="options_box">
+                
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <div class="menu">
+        <div class="menu_content">
+            <div class="menu_title"><h1>NSI 2024 - <span style="font-family: Henny Penny; font-size: 1em;">Crisis</span></h1></div>
+
+            <div class="close_menu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <div class="achievements">
+                <div class="achievement_title">
+                    <h3>Progression</h3>
+                </div>
+            
+                <div class="achievements_bar">
+                    <div class="progress_container">
+                        <div class="progress_bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            
+                <div class="current_objective">
+                    <p id="objectiveText">Objectif : Aucun objectif en cours</p>
+                </div>
+            </div>
+        </div>
+        <div class="menu_footer">
+            <p>&copy; 2024 - Crisis </p>
+        </div>
+    </div>
+
+    .
+    
+    <script src="assets/js/menu.js"></script>
+</body>
+</html>
