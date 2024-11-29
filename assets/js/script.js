@@ -72,6 +72,11 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
+//Transmission progression 
+function addProgress(){
+    localStorage.setItem("addprogress", 1);
+}
+
 //Récupération username
 
 function loginComputer(){
@@ -98,10 +103,6 @@ function typeText(text) {
 window.onload = function() {
     const message = "Bonjour " + username + ". Nous avons urgemment besoin de vous. Veuillez ouvrir le menu de votre ordinateur et lancer l'application Video.";
     typeText(message);
-
-    setTimeout(() => {
-        document.getElementById("cctv").style.display = "none";
-    }, 5000);
 };
 
 document.getElementById("menu_username").innerText = username;
@@ -114,6 +115,7 @@ document.getElementById("video_li").addEventListener("click", () => {
         document.getElementById("typed-text").innerHTML = "";
         typeText("Vous trouverez tous les renseignements nécessaires dans l'application Bloc-notes.");
     }, 25000);
+    addProgress();
 });
 
 function netstatMessage() {
@@ -132,6 +134,8 @@ function ipFailMessage(){
         localStorage.setItem("show_epilepsy_warning", 1);
     }, 10000);
     setTimeout(launchVirus, 20000);
+
+    addProgress();
     
 }
 
@@ -198,6 +202,8 @@ function skypeCall() {
 }
 
 function shutdownAll() {
+
+    addProgress();
 
     console.log("Shutting down");
 
@@ -346,6 +352,9 @@ function fileFound(){
 
             const takePhoneAudio = new Audio("assets/sounds/tutorial/tuto_voice8.mp3");
             takePhoneAudio.play();
+
+            addProgress();
+            
         }, 10000)
     }, 8000)
 }

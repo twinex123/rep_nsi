@@ -218,21 +218,23 @@ function toggleMenuCtrl(){
 //MESSAGES FROM OTHER WINDOWS
 
 window.addEventListener('message', (event) => {
-    if (event.data.type === 'toggleMenuCtrl') {
-        toggleMenuCtrl()
+    const message = event.data;
+    if (message.type === 'toggleMenuCtrl') {
+        toggleMenuCtrl();
     } 
 });
 
 //EPILEPSY WARNING
 
 localStorage.setItem("show_epilepsy_warning", 0);
+localStorage.setItem("addprogress", "0");
 
 setInterval(() => {
-    if(localStorage.getItem("show_epilepsy_warning") == 1){
+    if (localStorage.getItem("show_epilepsy_warning") === "1") {
         showEpilepsyWarning();
-        localStorage.setItem("show_epilepsy_warning", 0);
-    }
-}, 1000)
+        localStorage.setItem("show_epilepsy_warning", "0");
+    } 
+}, 1000);
 
 function showEpilepsyWarning(){
     var epilepsy_warning = document.createElement("div");
@@ -317,6 +319,15 @@ document.addEventListener('keydown', (event) => {
 
 //PROGRESSION //////////////////////////////////////////////////////////////////////////
 
+localStorage.setItem("addprogress", 0);
+
+setInterval(() => {
+    if (localStorage.getItem("addprogress") == "1") {
+        localStorage.setItem("addprogress", "0");
+        addProgress();
+    }
+}, 1000);
+
 const objectives = [
     { name: "Regarder la vidéo de Mr. Loyd" },
     { name: "Trouver l'adresse IP de l'attaquant" },
@@ -327,6 +338,7 @@ const objectives = [
 let currentObjectiveIndex = 0; 
 let totalObjectives = objectives.length;
 let completedObjectives = 0;
+let nb_update = 0;
 
 updateObjective();
 updateProgressBar();
@@ -338,14 +350,12 @@ function addProgress() {
         currentObjectiveIndex += 1;
         updateObjective();
     } else {
-        alert("Tous les objectifs ont été complétés !");
         updateObjective(true);
     }
 
     updateProgressBar();
 }
 
-var nb_update = 0;
 
 function updateProgressBar() {
     const progressBar = document.getElementById("progressBar");
@@ -353,7 +363,7 @@ function updateProgressBar() {
 
     const progressPercent = (completedObjectives / totalObjectives) * 100;
 
-    if(nb_update!=0){progressBar.style.color="black"};
+    if(nb_update!=0){progressBar.style.color="black"}else{progressBar.style.color="white"};
     nb_update+=1;
 
     progressBar.style.width = `${progressPercent}%`;
