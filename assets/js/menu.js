@@ -269,13 +269,16 @@ setInterval(() => {
 
 //OPTIONS
 
-var options_page = document.querySelector(".options_page");
+const options_page = document.querySelector(".options_page");
+const options_overlay = document.querySelector(".options_overlay");
 
 function openOptions(){
     options_page.style.display = "block";
+    options_overlay.style.display = "block";
 }
 function closeOptions(){
     options_page.style.display = "none";
+    options_overlay.style.display = "none";
 }
 
 //MAIN ARROWS
@@ -380,4 +383,30 @@ function updateObjective(isCompleted = false) {
     } else {
         objectiveText.textContent = "Tous les objectifs sont terminés !";
     }
+}
+
+
+//SAUVEGARDE
+
+
+function saveBackup(){
+    
+    let get_username = localStorage.getItem("username") || "Joueur";
+    let get_progress = nb_update;
+
+    let userData = {
+        username: get_username,
+        progress: get_progress
+    };
+
+    const dataStr = JSON.stringify(userData, null, 2); 
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob); 
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "sauvegarde.json"; 
+    link.click();
+
+    URL.revokeObjectURL(url); 
 }

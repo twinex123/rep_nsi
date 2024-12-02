@@ -94,27 +94,43 @@
     </div>
 
     <div class="options_page">
-        <video autoplay muted loop class="background_video">
-            <source src="assets/video/options.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture vidéo.
-        </video>
-        <div class="options_overlay"></div>
+        <h1>Progression</h1>
         <div class="close_credits" onclick="closeOptions()" style="z-index: 1000;">
             <span><i class="fa-solid fa-xmark"></i></span>
         </div>
         <div class="options_content">
-            <h1>Progression</h1>
-            <div class="options_box">
-                
+            <div class="achievements">
+                <div class="achievement_title">
+                    <h1>Progression</h1>
+                </div>
+            
+                <div class="achievements_bar">
+                    <div class="progress_container">
+                        <div class="progress_bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            
+                <div class="current_objective">
+                    <p id="objectiveText">Objectif : Aucun objectif en cours</p>
+                </div>
+
+                <div class="backup">
+                    <h3>Sauvegarde</h3>
+                    <div class="controls">
+                        <button id="saveBackup">Sauvegarder la partie</button>
+                        <button id="loadBackup">Charger votre sauvegarde</button>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="options_overlay"></div>
     </div>
     
     
 
     <div class="menu">
         <div class="menu_content">
-            <div class="menu_title"><h1>NSI 2024 - <span style="font-family: Henny Penny; font-size: 1em;">Crisis</span></h1></div>
+            <div class="menu_title"><h1><span style="font-family: Henny Penny; font-size: 1em;">Crisis</span></h1></div>
 
             <div class="close_menu">
                 <i class="fa-solid fa-xmark"></i>
@@ -135,14 +151,15 @@
                     <p id="objectiveText">Objectif : Aucun objectif en cours</p>
                 </div>
             </div>
+
+            <div class="menu_back" onclick="window.location.reload()">
+                <p>Retourner au menu <i class="fa-solid fa-arrow-right"></i></p>
+            </div>
         </div>
         <div class="menu_footer">
             <p>&copy; 2024 - Crisis </p>
         </div>
     </div>
-
-    .
-    
     <script src="assets/js/menu.js"></script>
 </body>
 </html>
