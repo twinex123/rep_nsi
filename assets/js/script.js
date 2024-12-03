@@ -1,3 +1,23 @@
+//HANDLE PROGRESS
+
+setInterval(() => {
+    if(localStorage.getItem("progress")){
+        var advancement = localStorage.getItem("progress");
+    
+        switch (advancement){
+            case 1:
+                openNotepad();
+            case 2:
+                ipFailMessage();
+            case 3:
+                shutdownAll();
+            case 4:
+                fileFound();
+        }
+    
+    }
+}, 1000);
+
 // Menu Démarrer : affichage/masquage
 var startButton = document.getElementById("start-button");
 var startMenu = document.getElementById("start-menu");
@@ -111,12 +131,16 @@ document.getElementById("video_li").addEventListener("click", () => {
     const presentation_audio = new Audio("assets/sounds/presentation.mp3");
     presentation_audio.play();
     setTimeout(() => {
-        index = 0; 
-        document.getElementById("typed-text").innerHTML = "";
-        typeText("Vous trouverez tous les renseignements nécessaires dans l'application Bloc-notes.");
+        openNotepad();
     }, 25000);
     addProgress();
 });
+
+function openNotepad(){
+    index = 0; 
+    document.getElementById("typed-text").innerHTML = "";
+    typeText("Vous trouverez tous les renseignements nécessaires dans l'application Bloc-notes.");
+}
 
 function netstatMessage() {
     console.log("Executing netstatMessage");

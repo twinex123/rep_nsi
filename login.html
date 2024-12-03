@@ -50,5 +50,13 @@
 
     <script src="assets/js/engine.js"></script>
     <script src="assets/js/script.js"></script>
+
+    <script>
+        window.onload = function () {
+            if(localStorage.getItem("progress")){
+                window.location.href = "crt.html";
+            }
+        };
+    </script>
 </body>
 </html>

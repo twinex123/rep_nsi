@@ -388,6 +388,12 @@ function updateObjective(isCompleted = false) {
 
 //SAUVEGARDE
 
+function loadBackup(){
+    document.getElementById("fileInput").click(); 
+};
+document.getElementById("saveBackup").addEventListener("click", () => {
+    saveBackup();
+});
 
 function saveBackup(){
     
@@ -405,8 +411,42 @@ function saveBackup(){
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "sauvegarde.json"; 
+    link.download = "sauvegarde_"+get_username+".json"; 
     link.click();
 
     URL.revokeObjectURL(url); 
+
+    alert("Progression bien sauvegardé!")
+}
+
+function handleFileChange(event){
+    const file = event.target.files[0]; 
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            try {
+                const loadedData = JSON.parse(e.target.result); 
+                userData = loadedData; 
+                console.log("Data loaded from backup :", userData);
+
+                handleBackup(userData.progress, userData.username)
+            } catch (err) {
+                console.error("Error occured while loading backup :", err);
+                alert("Invalid file. Please retry.");
+            }
+        };
+
+        reader.readAsText(file); 
+    }
+};
+
+//HANDLE BACKUP
+
+function handleBackup(progress, username){
+
+    localStorage.setItem("username", username);
+    localStorage.setItem("progress", progress);
+
 }

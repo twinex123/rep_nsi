@@ -117,16 +117,15 @@
                 <div class="backup">
                     <h3>Sauvegarde</h3>
                     <div class="controls">
-                        <button id="saveBackup">Sauvegarder la partie</button>
-                        <button id="loadBackup">Charger votre sauvegarde</button>
+                        <button id="saveBackup" onclick="saveBackup()">Sauvegarder la partie</button>
+                        <button id="loadBackup" onclick="loadBackup()" >Charger votre sauvegarde</button>
+                        <input onchange="handleFileChange(event)" type="file" id="fileInput" style="display: none;" accept=".json">
                     </div>
                 </div>
             </div>
         </div>
         <div class="options_overlay"></div>
     </div>
-    
-    
 
     <div class="menu">
         <div class="menu_content">
@@ -160,6 +159,7 @@
             <p>&copy; 2024 - Crisis </p>
         </div>
     </div>
+
     <script src="assets/js/menu.js"></script>
 </body>
 </html>
