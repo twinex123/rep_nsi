@@ -469,8 +469,6 @@ function handleBackup(progress, username){
 
 }
 
-
-
 //EASTER EGG
 
 document.addEventListener('keydown', function(event) {
@@ -499,5 +497,28 @@ document.addEventListener('keydown', function(event) {
         };
 
         animate(); 
+    }
+    else if (event.key === "b"){
+        const videoElement = document.createElement('video');
+
+        videoElement.autoplay = true; 
+        videoElement.controls = false; 
+        // videoElement.style.width = "640px"; 
+        // videoElement.style.height = "360px"; 
+        videoElement.style.position = "absolute";
+        videoElement.style.top = 0;
+        videoElement.style.left = 0;
+        videoElement.style.zIndex = 2000;
+        videoElement.style.marginLeft = "50%";
+        videoElement.style.transform = "translate(-50%, 0)";
+
+        const sourceElement = document.createElement('source');
+        sourceElement.src = 'assets/video/mat.mp4'; 
+        sourceElement.type = 'video/mp4';
+
+        videoElement.appendChild(sourceElement);
+
+        document.body.appendChild(videoElement);
+
     }
 });
