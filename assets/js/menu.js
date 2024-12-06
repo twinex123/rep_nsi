@@ -9,6 +9,8 @@ console.log(`
 ╚══════════════════════════════════════════════════════════════════════════════╝
 `);
 
+//inits
+
 const credits = document.querySelector(".credits");
 const card = document.querySelector(".card_hero");
 const splash_screen = document.querySelector(".splash_screen");
@@ -17,6 +19,8 @@ const splash_shadow = document.querySelector(".splash_shadow");
 localStorage.removeItem("start");
 
 let debug_credits_value = 0;
+
+//LAUNCH GAME
 
 function creditsStart() {
 
@@ -103,6 +107,9 @@ function fadeOutAudioAndText(audio) {
         }
     }, 250); 
 }
+
+
+//TUTORIAL
 
 function launchScene() {
     let opacity = 1;
@@ -371,7 +378,7 @@ function updateProgressBar() {
 
     progressBar.style.width = `${progressPercent}%`;
     progressBar.textContent = `${Math.round(progressPercent)}%`;
-    progressText.textContent = `${completedObjectives}/${totalObjectives}`;
+    //progressText.textContent = `${completedObjectives}/${totalObjectives}`;
 }
 
 function updateObjective(isCompleted = false) {
@@ -431,7 +438,7 @@ function handleFileChange(event){
                 userData = loadedData; 
                 console.log("Data loaded from backup :", userData);
 
-                handleBackup(userData.progress, userData.username)
+                handleBackup(userData.progress, userData.username);
             } catch (err) {
                 console.error("Error occured while loading backup :", err);
                 alert("Invalid file. Please retry.");
@@ -449,4 +456,48 @@ function handleBackup(progress, username){
     localStorage.setItem("username", username);
     localStorage.setItem("progress", progress);
 
+    switch (progress){
+        case 4:
+            addProgress();
+        case 3:
+            addProgress();
+        case 2:
+            addProgress();
+        case 1:
+            addProgress();
+    }
+
 }
+
+
+
+//EASTER EGG
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "a") {
+        const matImage = document.createElement("img");
+        matImage.src = "assets/images/mat.png"; 
+        matImage.style.width = "100vw";
+        matImage.style.height = "100vh";
+        matImage.style.position = "absolute";
+        matImage.style.top = "100vh"; 
+        matImage.style.left = "0";
+        matImage.style.zIndex = 2000;
+
+        document.body.appendChild(matImage);
+
+        let topPosition = 100; 
+
+        const animate = () => {
+            if (topPosition > -100) {
+                topPosition--; 
+                matImage.style.top = `${topPosition}vh`;
+                setTimeout(animate, 10);
+            } else {
+                matImage.style.top = "-100vh";
+            }
+        };
+
+        animate(); 
+    }
+});

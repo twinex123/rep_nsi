@@ -3,17 +3,26 @@
 setInterval(() => {
     if(localStorage.getItem("progress")){
         var advancement = localStorage.getItem("progress");
-    
+        //console.log(advancement);
+        
+        if(advancement == 1){
+            
+        }
+        /*
         switch (advancement){
             case 1:
+                console.log('a');
                 openNotepad();
             case 2:
+                console.log('b');
                 ipFailMessage();
             case 3:
+                console.log('c');
                 shutdownAll();
             case 4:
+                console.log('d');
                 fileFound();
-        }
+        }*/
     
     }
 }, 1000);
