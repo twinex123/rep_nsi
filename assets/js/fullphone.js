@@ -256,6 +256,10 @@ function moveRedDot() {
 
         currentStep++;
         setTimeout(moveRedDot, 500);
+    } else {
+        redDot.style.display = "none";
+
+        localStorage.setItem("lacunh_fainting", 1);
     }
 }
 

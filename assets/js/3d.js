@@ -669,7 +669,7 @@ phone_iframe.addEventListener('click', openPhone);
 
 let debug_phone_value = 0;
 
-localStorage.setItem("can_open_phone", 0);
+localStorage.setItem("can_open_phone", 1);
 
 let can_open_phone = false;
 
@@ -697,3 +697,28 @@ window.addEventListener('message', (event) => {
         phone_iframe.src = "apps/phone.html";
     }
 });
+
+
+//CAMERA SHAKING + FAINTING
+
+setInterval(() => {
+    if(localStorage.getItem("launch_fainting")){
+            const elapsed = clock.getElapsedTime();
+    
+            if (elapsed <= shakeDuration) {
+                const offsetX = (Math.random() - 0.5) * shakeIntensity;
+                const offsetY = (Math.random() - 0.5) * shakeIntensity;
+                const offsetZ = (Math.random() - 0.5) * shakeIntensity;
+    
+                camera.position.x += offsetX;
+                camera.position.y += offsetY;
+                camera.position.z += offsetZ;
+    
+                camera.position.x -= offsetX;
+                camera.position.y -= offsetY;
+                camera.position.z -= offsetZ;
+            } else {
+                isShaking = false; 
+            }
+    };
+}, 1000);

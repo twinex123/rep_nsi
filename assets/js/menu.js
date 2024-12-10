@@ -503,8 +503,6 @@ document.addEventListener('keydown', function(event) {
 
         videoElement.autoplay = true; 
         videoElement.controls = false; 
-        // videoElement.style.width = "640px"; 
-        // videoElement.style.height = "360px"; 
         videoElement.style.position = "absolute";
         videoElement.style.top = 0;
         videoElement.style.left = 0;
