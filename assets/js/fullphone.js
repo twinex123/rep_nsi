@@ -259,7 +259,7 @@ function moveRedDot() {
     } else {
         redDot.style.display = "none";
 
-        localStorage.setItem("lacunh_fainting", 1);
+        localStorage.setItem("launch_fainting", 1);
     }
 }
 

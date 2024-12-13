@@ -4,8 +4,8 @@ console.log(`
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║  NSI 2024 - CRISIS                                                           ║
 ║  Bon jeu !                                                                   ║
-║  Si vous êtes assez curieux pour lire ce message, tapez glitch(14235) dans   ║
-║  la console de votre navigateur.                                             ║
+║  Si vous êtes assez curieux pour lire ce message, appuyez sur m et z en      ║
+║  même temps sur la page d'accueil du jeu.                                    ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 `);
 
@@ -16,7 +16,9 @@ const card = document.querySelector(".card_hero");
 const splash_screen = document.querySelector(".splash_screen");
 const splash_menu = document.querySelector(".splash_menu");
 const splash_shadow = document.querySelector(".splash_shadow");
+
 localStorage.removeItem("start");
+localStorage.removeItem('launch_fainting');
 
 let debug_credits_value = 0;
 
@@ -469,54 +471,186 @@ function handleBackup(progress, username){
 
 }
 
+//FAINTING
+
+setInterval(() => {
+    if(localStorage.getItem("launch_fainting")){
+        console.log("launched fainting");
+
+        const faintingOverlay = document.createElement("div");
+        faintingOverlay.style.position = "absolute";
+        faintingOverlay.style.zIndex = "1000";
+        faintingOverlay.style.top = 0;
+        faintingOverlay.style.left = 0;
+        faintingOverlay.style.width = "100vw";
+        faintingOverlay.style.height = "100vh";
+        faintingOverlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+
+        document.body.appendChild(faintingOverlay);
+
+        let opacity = 0;
+        const fadeInInterval = setInterval(() => {
+            opacity += 0.01;  
+            faintingOverlay.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+
+            if (opacity >= 1) {
+                clearInterval(fadeInInterval);
+            }
+        }, 50);  
+
+
+    }
+}, 1000);
+
+
 //EASTER EGG
+let isMPressed = false;
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === "a") {
-        const matImage = document.createElement("img");
-        matImage.src = "assets/images/mat.png"; 
-        matImage.style.width = "100vw";
-        matImage.style.height = "100vh";
-        matImage.style.position = "absolute";
-        matImage.style.top = "100vh"; 
-        matImage.style.left = "0";
-        matImage.style.zIndex = 2000;
-
-        document.body.appendChild(matImage);
-
-        let topPosition = 100; 
-
-        const animate = () => {
-            if (topPosition > -100) {
-                topPosition--; 
-                matImage.style.top = `${topPosition}vh`;
-                setTimeout(animate, 10);
-            } else {
-                matImage.style.top = "-100vh";
-            }
-        };
-
-        animate(); 
+    if (event.key === "m") {
+        isMPressed = true;
     }
-    else if (event.key === "b"){
-        const videoElement = document.createElement('video');
 
-        videoElement.autoplay = true; 
-        videoElement.controls = false; 
-        videoElement.style.position = "absolute";
-        videoElement.style.top = 0;
-        videoElement.style.left = 0;
-        videoElement.style.zIndex = 2000;
-        videoElement.style.marginLeft = "50%";
-        videoElement.style.transform = "translate(-50%, 0)";
+    if (isMPressed) {
+        
+        if (event.key === "b"){
+            const videoElement = document.createElement('video');
 
-        const sourceElement = document.createElement('source');
-        sourceElement.src = 'assets/video/mat.mp4'; 
-        sourceElement.type = 'video/mp4';
+            videoElement.autoplay = true; 
+            videoElement.controls = false; 
+            videoElement.style.position = "absolute";
+            videoElement.style.top = 0;
+            videoElement.style.left = 0;
+            videoElement.style.zIndex = 2000;
+            videoElement.style.marginLeft = "50%";
+            videoElement.style.transform = "translate(-50%, 0)";
 
-        videoElement.appendChild(sourceElement);
+            const sourceElement = document.createElement('source');
+            sourceElement.src = 'assets/video/mat.mp4'; 
+            sourceElement.type = 'video/mp4';
 
-        document.body.appendChild(videoElement);
+            videoElement.appendChild(sourceElement);
 
+            document.body.appendChild(videoElement);
+        }
+        else if (event.key === "z") {
+            let matImage = document.createElement("img");
+            matImage.src = "assets/images/mat.png"; 
+            matImage.style.width = "100vw";
+            matImage.style.height = "100vh";
+            matImage.style.position = "absolute";
+            matImage.style.top = "calc(100vh - 2)"; 
+            matImage.style.left = "0";
+            matImage.style.zIndex = 2000;
+        
+            document.body.appendChild(matImage);
+        
+            let topPosition = 100;  
+
+            const animateUp = () => {
+                if (topPosition > 45) {  
+                    topPosition--; 
+                    matImage.style.top = `${topPosition}vh`; 
+                    setTimeout(animateUp, 10);  
+                } else {
+                    setTimeout(animateDown, 3000); 
+                }
+            };
+
+            const animateDown = () => {
+                if (topPosition < 100) {  
+                    topPosition++; 
+                    matImage.style.top = `${topPosition}vh`; 
+                    setTimeout(animateDown, 10);
+                } else {
+                    matImage.style.top = "calc(100vh - 2)";
+                    animateUp();  
+                }
+            };
+
+            animateUp();  
+
+            const createRandomImages = () => {
+                let randomImage = document.createElement("img");
+                randomImage.src = "assets/images/tloz.jpg"; 
+                randomImage.style.width = `${Math.random() * 10 + 5}vw`; 
+                randomImage.style.height = `${Math.random() * 10 + 5}vh`; 
+                randomImage.style.position = "absolute";
+                randomImage.style.top = `${Math.random() * 100}vh`;
+                randomImage.style.left = `${Math.random() * 100}vw`; 
+                randomImage.style.zIndex = 1000; 
+                document.body.appendChild(randomImage);
+                
+            };
+
+            imageInterval = setInterval(createRandomImages, 50);
+
+            setTimeout(() => {
+                let images = document.querySelectorAll("img, video");
+                images.forEach(img => {
+                    img.remove();
+                });
+            
+                let timeInterval = 2000; 
+            
+                const createImage = () => {
+                    let matImage = document.createElement("img");
+                    matImage.src = "assets/images/mat.png"; 
+                    matImage.style.width = "100vw";
+                    matImage.style.height = "100vh";
+                    matImage.style.position = "absolute";
+                    matImage.style.top = "100vh"; 
+                    matImage.style.left = "0";
+                    matImage.style.zIndex = 2000;
+            
+                    document.body.appendChild(matImage);
+            
+                    let topPosition = 100; 
+            
+                    const animate = () => {
+                        if (topPosition > -100) {
+                            topPosition--; 
+                            matImage.style.top = `${topPosition}vh`;
+                            setTimeout(animate, 10);
+                        } else {
+                            matImage.style.top = "-100vh";
+                        }
+                    };
+            
+                    animate(); 
+                };
+            
+                const startCreatingImages = () => {
+                    let matImageInterval = setInterval(() => {
+                        createImage();
+            
+                        if (timeInterval > 100) {
+                            timeInterval -= 200; 
+                            clearInterval(matImageInterval); 
+                            startCreatingImages(); 
+                        }
+                    }, timeInterval); 
+                };
+            
+                startCreatingImages();
+            
+                setTimeout(() => {
+                    let images = document.querySelectorAll("img, video");
+                    images.forEach(img => {
+                        img.remove();
+                    });
+                }, 10000); 
+            
+            }, 10000); 
+            
+           
+        }
     }
 });
+
+document.addEventListener('keyup', function(event) {
+    if (event.key === "m") {
+        isMPressed = false;
+    }
+});
+
